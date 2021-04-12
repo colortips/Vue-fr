@@ -8,7 +8,7 @@
       <div>
         <label for="add-item-quantity">Quantité : {{ quantity }}</label>
         <input v-model.number="quantity" id="add-item-quantity" type="number" />
-        <button @click="addToShoppingCart(quantity)">
+        <button @click="updateShoppingCart()">
           Ajouter au panier d'achat
         </button>
       </div>
@@ -59,6 +59,11 @@ export default {
   beforeMount() {
     if (new Date().getDate() % 2 === 0) this.promo = true;
   },
+  methods:{
+    updateShoppingCart(){
+      this.$emit('add-items-to-cart', this.quantity)
+    }
+  }
 };
 </script>
 <style lang="scss">
