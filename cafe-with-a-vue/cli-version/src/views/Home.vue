@@ -29,58 +29,19 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import MenuItem from "../components/MenuItem.vue";
 export default {
   name: "App",
+  computed: {
+    ...mapState({
+      restaurantName: "restaurantName",
+      shoppingCart: "shoppingCart",
+      simpleMenu: "simpleMenu",
+    }),
+  },
   components: {
     MenuItem,
-  },
-  data() {
-    return {
-      address: "18 avenue du Beurre, Paris, France",
-      email: "hello@cafewithavue.bakery",
-      phone: "01 88 88 88 88",
-      restaurantName: "La belle vue",
-      shoppingCart: 0,
-      simpleMenu: [
-        {
-          name: "Croissant",
-          image: {
-            source: "/images/croissant.jpg",
-            alt: "Un croissant",
-          },
-          inStock: true,
-          quantity: 1,
-          price: 1.5,
-        },
-        {
-          name: "Baguette",
-          image: {
-            source: "/images/french-baguette.jpeg",
-            alt: "Quatre baguettes de pain",
-          },
-          inStock: true,
-          quantity: 1,
-          price: 0.9,
-        },
-        {
-          name: "Éclair",
-          image: {
-            source: "/images/eclair.jpg",
-            alt: "Éclair au chocolat",
-          },
-          inStock: false,
-          quantity: 1,
-          price: 1,
-        },
-      ],
-    };
-  },
-  computed: {
-    copyright() {
-      const currentYear = new Date().getFullYear();
-      return `Copyright ${this.restaurantName} ${currentYear}`;
-    },
   },
   methods: {
     addToShoppingCart(amount) {

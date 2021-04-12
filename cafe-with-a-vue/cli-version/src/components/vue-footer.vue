@@ -4,18 +4,11 @@
   </footer>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: "App",
-  data(){
-      return{
-          restaurantName: "La belle vue",
-      }
-  },
-  computed: {
-    copyright() {
-      const currentYear = new Date().getFullYear();
-      return `Copyright ${this.restaurantName} ${currentYear}`;
-    },
-  },
+  computed:{
+    ...mapGetters(['copyright'])
+  }
 };
 </script>
