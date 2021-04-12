@@ -11,31 +11,29 @@
     <section class="menu">
       <h2>Menu</h2>
       <MenuItem
-				v-for="item in simpleMenu"
-				:addToShoppingCart="addToShoppingCart"
-				:name="item.name"
-				:image="item.image"
-				:quantity="item.quantity"
-				:inStock="item.inStock"
-				:key="item.name"
-			/>
+        v-for="item in simpleMenu"
+        :addToShoppingCart="addToShoppingCart"
+        :name="item.name"
+        :image="item.image"
+        :quantity="item.quantity"
+        :inStock="item.inStock"
+        :price="item.price"
+        :key="item.name"
+      />
     </section>
 
     <aside class="shopping-cart">
       <h2>Panier d'achat : {{ shoppingCart }} articles</h2>
     </aside>
-
-    
-    
   </div>
 </template>
 
 <script>
-import MenuItem from '../components/MenuItem.vue'
+import MenuItem from "../components/MenuItem.vue";
 export default {
   name: "App",
   components: {
-    MenuItem
+    MenuItem,
   },
   data() {
     return {
@@ -53,15 +51,17 @@ export default {
           },
           inStock: true,
           quantity: 1,
+          price: 1.5,
         },
         {
-          name: "Baguette de pain",
+          name: "Baguette",
           image: {
             source: "/images/french-baguette.jpeg",
             alt: "Quatre baguettes de pain",
           },
           inStock: true,
           quantity: 1,
+          price: 0.9,
         },
         {
           name: "Éclair",
@@ -71,6 +71,7 @@ export default {
           },
           inStock: false,
           quantity: 1,
+          price: 1,
         },
       ],
     };
@@ -90,7 +91,7 @@ export default {
 </script>
 <style lang="scss">
 .app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

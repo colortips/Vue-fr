@@ -1,21 +1,13 @@
 <template>
   <div class="menu-item">
-    <img
-      class="menu-item__image"
-      :src="image.source"
-      :alt="image.alt"
-    />
+    <img class="menu-item__image" :src="image.source" :alt="image.alt" />
     <div>
-      <h3>{{ name }}</h3>
+      <h3>{{ name }} : {{ calcPrice }} €</h3>
       <p v-if="inStock">En stock</p>
       <p v-else>En rupture de stock</p>
       <div>
         <label for="add-item-quantity">Quantité : {{ quantity }}</label>
-        <input
-          v-model.number="quantity"
-          id="add-item-quantity"
-          type="number"
-        />
+        <input v-model.number="quantity" id="add-item-quantity" type="number" />
         <button @click="addToShoppingCart(quantity)">
           Ajouter au panier d'achat
         </button>
@@ -26,7 +18,21 @@
 <script>
 export default {
   name: "MenuItem",
-  props: ["addToShoppingCart", "name", "image", "quantity", "inStock"],
+  props: ["addToShoppingCart", "name", "image", "quantity", "inStock", "price"],
+  data(){
+    return{
+      promo: false,
+    }
+  },
+  computed: {
+    calcPrice() {
+      if (this.promo) return this.price * 0.9;
+      else return this.price;
+    },
+  },
+  beforeMount() {
+    if (new Date().getDate() % 2 === 0) this.promo = true;
+  },
 };
 </script>
 <style lang="scss">
