@@ -50,8 +50,14 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    INCREMENT_SHOPPINGCART(state, amount) {
+      state.shoppingCart += Number(amount);
+    },
   },
   actions: {
+    addToShoppingCart(context, amount){
+      context.commit('INCREMENT_SHOPPINGCART', amount);
+    }
   },
   modules: {
   }

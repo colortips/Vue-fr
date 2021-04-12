@@ -18,7 +18,6 @@
         :inStock="item.inStock"
         :price="item.price"
         :key="item.name"
-        @add-items-to-cart="addToShoppingCart"
       />
     </section>
 
@@ -42,11 +41,6 @@ export default {
   },
   components: {
     MenuItem,
-  },
-  methods: {
-    addToShoppingCart(amount) {
-      this.shoppingCart += amount;
-    },
   },
 };
 </script>

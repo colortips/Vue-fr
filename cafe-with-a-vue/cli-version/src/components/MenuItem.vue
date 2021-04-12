@@ -8,7 +8,7 @@
       <div>
         <label for="add-item-quantity">Quantité : {{ quantity }}</label>
         <input v-model.number="quantity" id="add-item-quantity" type="number" />
-        <BaseButton @click="updateShoppingCart()">
+        <BaseButton @click="addToShoppingCart(quantity)">
           <template v-slot:title> Ajouter au panier </template>
         </BaseButton>
       </div>
@@ -17,14 +17,12 @@
 </template>
 <script>
 import BaseButton from "./BaseButton.vue";
+import { mapActions } from "vuex";
+
 
 export default {
   name: "MenuItem",
   props: {
-    addToShoppingCart: {
-      type: Function,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
@@ -62,9 +60,12 @@ export default {
     if (new Date().getDate() % 2 === 0) this.promo = true;
   },
   methods: {
-    updateShoppingCart() {
-      this.$emit("add-items-to-cart", this.quantity);
-    },
+    // updateShoppingCart() {
+    //   this.$emit("add-items-to-cart", this.quantity);
+    // },
+    ...mapActions({
+      addToShoppingCart: "addToShoppingCart",
+    })
   },
   components: {
     BaseButton,
