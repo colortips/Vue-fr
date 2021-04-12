@@ -8,47 +8,49 @@
       <div>
         <label for="add-item-quantity">Quantité : {{ quantity }}</label>
         <input v-model.number="quantity" id="add-item-quantity" type="number" />
-        <button @click="updateShoppingCart()">
-          Ajouter au panier d'achat
-        </button>
+        <BaseButton @click="updateShoppingCart()">
+          <template v-slot:title> Ajouter au panier </template>
+        </BaseButton>
       </div>
     </div>
   </div>
 </template>
 <script>
+import BaseButton from "./BaseButton.vue";
+
 export default {
   name: "MenuItem",
   props: {
-    addToShoppingCart:{
+    addToShoppingCart: {
       type: Function,
-      required: true
+      required: true,
     },
-    name:{
+    name: {
       type: String,
-      required: true
+      required: true,
     },
-    image:{
+    image: {
       type: Object,
-      required: true
+      required: true,
     },
-    quantity:{
+    quantity: {
       type: Number,
-      required: true
+      required: true,
     },
-    inStock:{
+    inStock: {
       type: Boolean,
-      required: true
+      required: true,
     },
-    price:{
+    price: {
       type: Number,
-      required: true
+      required: true,
     },
   },
   // ["addToShoppingCart", "name", "image", "quantity", "inStock", "price"],
-  data(){
-    return{
+  data() {
+    return {
       promo: false,
-    }
+    };
   },
   computed: {
     calcPrice() {
@@ -59,11 +61,14 @@ export default {
   beforeMount() {
     if (new Date().getDate() % 2 === 0) this.promo = true;
   },
-  methods:{
-    updateShoppingCart(){
-      this.$emit('add-items-to-cart', this.quantity)
-    }
-  }
+  methods: {
+    updateShoppingCart() {
+      this.$emit("add-items-to-cart", this.quantity);
+    },
+  },
+  components: {
+    BaseButton,
+  },
 };
 </script>
 <style lang="scss">
